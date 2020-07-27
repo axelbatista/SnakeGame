@@ -45,8 +45,8 @@ private:
 	Graphics gfx;
 	Board brd;
 	Snake snek;
-	Food fd;
 	Body bd;
+	Food fd;
 	int snekMoveCounter = 0;
 	float period = 20.0f;
 	/********************************/
