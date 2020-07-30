@@ -32,7 +32,7 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	brd(gfx),
-	snek(Graphics::ScreenWidth / 2, Graphics::ScreenHeight / 2, brd),
+	snek(Graphics::ScreenWidth / 2, Graphics::ScreenHeight / 2),
 	bd(),
 	fd(bd)
 {

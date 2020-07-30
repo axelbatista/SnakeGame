@@ -7,9 +7,7 @@ class Snake {
 	Color c;
 public:
 	Snake() = default;
-	Snake(int pos, int pos2, const Board& b) : spot{ pos,pos2 }, c{ Colors::Green } {
-	}
-	Snake(int pos, int pos2) : spot{ pos, pos2 }, c{ Colors::Green } {}
+	Snake(int pos, int pos2) : spot{ pos,pos2 }, c{ Colors::Red } {}
 	void show(const Board& b) const;
 	Location& getSpot();
 	const Location getSpot1() const;
