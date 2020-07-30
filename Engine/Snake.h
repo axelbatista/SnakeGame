@@ -1,6 +1,7 @@
 #pragma once
 #include "Location.h"
 #include "Board.h"
+#include <vector>
 
 class Snake {
 	Location spot;
@@ -17,9 +18,8 @@ public:
 
 
 class Body {
-	static constexpr int size = 100;
-	Snake segments[size];
-	int current;
+	std::vector<Snake> segments;
+	int current; 
 public:
 	Body() : current{ 0 } {};
 	void grow();
