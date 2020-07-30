@@ -51,34 +51,34 @@ void Game::UpdateModel()
 	if (!gameIsOver) {
 		fd.draw(brd);
 		if (wnd.kbd.KeyIsPressed('D')) {
-			if (snekMoveCounter >= period) {
-				bd.change(1, 0,snek);
-				snekMoveCounter = 0;
-				bd.collided(snek);
-			}
+			if (vel.x == -20) {
+
+			} else
+			vel = { 20,0 };
 		}
 		else if (wnd.kbd.KeyIsPressed('A')) {
-			if (snekMoveCounter >= period) {
-				bd.change(-1, 0,snek);
-				snekMoveCounter = 0;
-				bd.collided(snek);
-			}
+			if (vel.x == 20) {
+
+			} else 
+			vel = { -20,0 };
 		}
 		else if (wnd.kbd.KeyIsPressed('S')) {
-			if (snekMoveCounter >= period) {
-				bd.change(0, 1,snek);
-				snekMoveCounter = 0;
-				bd.collided(snek);
-			}
+			if (vel.y == -20) {
+
+			} else 
+			vel = { 0,20 };
 		}
 		else if (wnd.kbd.KeyIsPressed('W')) {
-			if (snekMoveCounter >= period) {
-				bd.change(0, -1,snek);
-				snekMoveCounter = 0;
-				bd.collided(snek);
-			}
+			if (vel.y == 20) {
+
+			} else 
+			vel = { 0,-20 };
 		}
 		snek.show(brd);
+		if (snekMoveCounter >= period) {
+			bd.change(vel, snek);
+			snekMoveCounter = 0;
+		}
 		if (fd.isCollided(snek)) {
 			bd.grow();
 			bodStarted = true;

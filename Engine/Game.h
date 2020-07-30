@@ -49,6 +49,7 @@ private:
 	Food fd;
 	int snekMoveCounter = 0;
 	float period = 20.0f;
+	Location vel = { 0,0 };
 	/********************************/
 	/*  User Variables              */
 	/********************************/

@@ -7,11 +7,12 @@ class Snake {
 	Color c;
 public:
 	Snake() = default;
-	Snake(int pos, int pos2) : spot{ pos,pos2 }, c{ Colors::Red } {}
+	Snake(int pos, int pos2) : spot{ pos,pos2 }, c{ Colors::Green } {}
 	void show(const Board& b) const;
 	Location& getSpot();
 	const Location getSpot1() const;
 	bool touched(const Snake& snek) const;
+	const Color getColor() const;
 };
 
 
@@ -23,7 +24,7 @@ public:
 	Body() : current{ 0 } {};
 	void grow();
 	void show1(const Board& b);
-	void change(int x, int y, Snake& snake);
+	void change(const Location vel, Snake& snake);
 	void collided(const Snake& snek) const;
 	bool checkAvailable(int x, int y) const;
 };

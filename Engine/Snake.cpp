@@ -5,18 +5,18 @@ extern bool bodStarted;
 
 void Snake::show(const Board& b) const
 {
-	b.draw(spot, c);
+	b.draw(spot, { 255,0,0 });
 }
 
 void Body::show1(const Board& b) {
 	for (const auto &each : segments) {
 		int one = each.getSpot1().x;
 		if (one >= 0 && one <= 780)
-			b.draw(each.getSpot1(), { 0,255,0 });
+			b.draw(each.getSpot1(), each.getColor());
 	}
 }
 
-void Body::change(int x, int y,Snake& snake)
+void Body::change(const Location vel,Snake& snake)
 { 
 	if (bodStarted) {
 		for (int i = current - 1; i >= 0; i--) {
@@ -26,12 +26,13 @@ void Body::change(int x, int y,Snake& snake)
 			segments[i] = segments[i - 1];
 		}
 	}
-	if (snake.getSpot1().x + x > 780 || snake.getSpot1().x + x < 0 || snake.getSpot1().y + y < 0 || snake.getSpot1().y + y> 580) {
+	if (snake.getSpot1().x + vel.x > 780 || snake.getSpot1().x + vel.x < 0 || snake.getSpot1().y + vel.y < 0 || snake.getSpot1().y + vel.y> 580) {
 		gameIsOver = true;
 		return;
 	}
-	snake.getSpot().x += (x*20);
-	snake.getSpot().y += (y*20);
+	snake.getSpot().x += vel.x;
+	snake.getSpot().y += vel.y;
+	collided(snake);
 }
 
 void Body::collided(const Snake& snek) const
@@ -63,6 +64,11 @@ const Location Snake::getSpot1() const {
 bool Snake::touched(const Snake& snek) const
 {
 	return spot.x == snek.spot.x && spot.y == snek.spot.y;
+}
+
+const Color Snake::getColor() const
+{
+	return c;
 }
 
 void Body::grow()
