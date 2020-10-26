@@ -49,7 +49,6 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	if (!gameIsOver) {
-		fd.draw(brd);
 		if (wnd.kbd.KeyIsPressed('D')) {
 			if (vel.x == -20) {
 
@@ -74,7 +73,6 @@ void Game::UpdateModel()
 			} else 
 			vel = { 0,-20 };
 		}
-		snek.show(brd);
 		if (snekMoveCounter >= period) {
 			bd.change(vel, snek);
 			snekMoveCounter = 0;
@@ -83,11 +81,9 @@ void Game::UpdateModel()
 			bd.grow();
 			bodStarted = true;
 			fd = Food(bd);
-			if (period > 2.0)
+			if (period > 5.0f)
 				period -= 1.0f;
 		}
-		if (bodStarted)
-			bd.show1(brd);
 		snekMoveCounter++;
 	}
 }
@@ -96,4 +92,10 @@ void Game::ComposeFrame()
 {
 	if (gameIsOver)
 		SpriteCodex::DrawGameOver(350, 250, gfx);
+	else {
+		snek.show(brd);
+		if (bodStarted)
+			bd.show1(brd);
+		fd.draw(brd);
+	}
 }

@@ -1,7 +1,9 @@
 #include "Snake.h"
 
+
 extern bool gameIsOver;
 extern bool bodStarted;
+
 
 void Snake::show(const Board& b) const
 {
@@ -24,10 +26,9 @@ void Body::change(const Location vel,Snake& snake)
 					segments.emplace_back(snake);
 				else if (i == 0)
 					segments[i] = snake;
-				else if (segments.size() != current) {
-					segments.emplace_back(0, 0);
-					segments[i] = segments[i - 1];
-				} else
+				else if (segments.size() != current)
+					segments.emplace_back(segments[i - 1]);
+				else
 					segments[i] = segments[i - 1];
 			}
 	}
@@ -83,7 +84,9 @@ const Color Snake::getColor() const
 void Body::grow()
 {
 	current++;
-	segments.reserve(current);
+	while (segments.capacity() != current) {
+		segments.reserve(current);
+	}
 }
 
 
