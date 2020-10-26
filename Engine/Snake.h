@@ -19,12 +19,15 @@ public:
 
 class Body {
 	std::vector<Snake> segments;
-	int current; 
+	int current = 0;
 public:
-	Body() : current{ 0 } {};
+	Body(Snake& snek) : current{ 0 } {
+		segments.emplace_back(snek);
+	}
 	void grow();
 	void show1(const Board& b);
-	void change(const Location vel, Snake& snake);
+	void change(const Location vel);
 	void collided(const Snake& snek) const;
 	bool checkAvailable(int x, int y) const;
+	const Snake& getStart();
 };

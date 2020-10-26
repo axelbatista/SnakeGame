@@ -25,15 +25,13 @@
 #include "SpriteCodex.h"
 
 bool gameIsOver = false;
-bool bodStarted = false;
 
 Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
 	brd(gfx),
-	snek(Graphics::ScreenWidth / 2, Graphics::ScreenHeight / 2),
-	bd(),
+	bd(Snake{ Graphics::ScreenWidth / 2, Graphics::ScreenHeight / 2 }),
 	fd(bd)
 {
 }
@@ -50,36 +48,27 @@ void Game::UpdateModel()
 {
 	if (!gameIsOver) {
 		if (wnd.kbd.KeyIsPressed('D')) {
-			if (vel.x == -20) {
-
-			} else
-			vel = { 20,0 };
+			if (vel.x != -20) 
+				vel = { 20,0 };
 		}
 		else if (wnd.kbd.KeyIsPressed('A')) {
-			if (vel.x == 20) {
-
-			} else 
+			if (vel.x != 20) 
 			vel = { -20,0 };
 		}
 		else if (wnd.kbd.KeyIsPressed('S')) {
-			if (vel.y == -20) {
-
-			} else 
-			vel = { 0,20 };
+			if (vel.y != -20)
+				vel = { 0,20 };
 		}
 		else if (wnd.kbd.KeyIsPressed('W')) {
-			if (vel.y == 20) {
-
-			} else 
+			if (vel.y != 20) 
 			vel = { 0,-20 };
 		}
 		if (snekMoveCounter >= period) {
-			bd.change(vel, snek);
+			bd.change(vel);
 			snekMoveCounter = 0;
 		}
-		if (fd.isCollided(snek)) {
+		if (fd.isCollided(bd.getStart())) {
 			bd.grow();
-			bodStarted = true;
 			fd = Food(bd);
 			if (period > 5.0f)
 				period -= 1.0f;
@@ -93,9 +82,7 @@ void Game::ComposeFrame()
 	if (gameIsOver)
 		SpriteCodex::DrawGameOver(350, 250, gfx);
 	else {
-		snek.show(brd);
-		if (bodStarted)
-			bd.show1(brd);
+		bd.show1(brd);
 		fd.draw(brd);
 	}
 }

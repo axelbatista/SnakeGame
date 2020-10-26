@@ -44,7 +44,6 @@ private:
 	MainWindow& wnd;
 	Graphics gfx;
 	Board brd;
-	Snake snek;
 	Body bd;
 	Food fd;
 	int snekMoveCounter = 0;
