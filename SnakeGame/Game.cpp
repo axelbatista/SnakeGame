@@ -20,7 +20,6 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
-#include "Move.h"
 #include "windows.h"
 #include "SpriteCodex.h"
 
@@ -51,7 +50,7 @@ void Game::UpdateModel()
 			if (vel.x != -20) 
 				vel = { 20,0 };
 		}
-		else if (wnd.kbd.KeyIsPressed('A')) {
+		else if (wnd.kbd.KeyIsPressed('A')) {			//toggle movement
 			if (vel.x != 20) 
 			vel = { -20,0 };
 		}
@@ -68,10 +67,10 @@ void Game::UpdateModel()
 			snekMoveCounter = 0;
 		}
 		if (fd.isCollided(bd.getStart())) {
-			bd.grow();
+			bd.grow();								//reinitialize with a copy assignment.
 			fd = Food(bd);
 			if (period > 5.0f)
-				period -= 1.0f;
+				period -= 0.5f;
 		}
 		snekMoveCounter++;
 	}

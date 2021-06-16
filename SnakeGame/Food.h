@@ -7,6 +7,6 @@ class Food {
 	Color c;
 public:
 	Food(const Body& bd);
-	bool isCollided(const Snake& snake) const;
+	bool isCollided(const Snake snake) const;
 	void draw(const Board& b);
 };

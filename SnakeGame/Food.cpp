@@ -17,7 +17,7 @@ Food::Food(const Body& bd) : c{ 255,255,255 }
 	spot = { x,y };
 }
 
-bool Food::isCollided(const Snake& snake) const
+bool Food::isCollided(const Snake snake) const
 {
 	return spot.x == snake.getSpot1().x && spot.y == snake.getSpot1().y;
 }
